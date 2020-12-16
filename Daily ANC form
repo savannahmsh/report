@@ -1,0 +1,559 @@
+<htmlform>
+    <style>
+        .section {
+            border: 1px solid $headerColor;
+            padding: 2px;
+            text-align: left;
+            margin-bottom: 1em;
+        }
+
+        .sectionHeader {
+            background-color: #2f1c55;
+            color: white;
+            /* display: block; */
+            padding: 2px;
+            font-weight: bold;
+        }
+
+        table tr:nth-child(even) {
+            background: #ffffff;
+        }
+
+        .alnright {
+            text-align: right;
+            color: #000000;
+            width: 25%;
+        }
+
+        .alnright_s {
+            text-align: right;
+            color: #000000;
+            width: 13%;
+        }
+
+        .alnleft_s {
+            text-align: left;
+            color: #000000;
+            width: 13%;
+        }
+
+        .alnleft_j {
+            text-align: left;
+            color: #000000;
+            width: 20%;
+        }
+
+        .alnleft {
+            text-align: left;
+            color: #000000;
+            width: 25%;
+        }
+
+        .error {
+            color: red;
+        }
+
+        td {
+            border: none;
+        }
+
+        table th, table td {
+            padding: 5px 10px;
+            border: None;
+        }
+
+        .legend_style {
+            max-width: 35%;
+            background: #FAFAFA;
+            <!-- padding: 5px; -->
+            margin: 0px left;
+            box-shadow: 1px 1px 25px rgba(0,0,0,0.10);
+            border-radius: 2px;
+            border: 1px solid #305a72;
+            border-bottom-left-radius: 2px;
+            text-transform: initial;
+        }
+
+        form fieldset, .form fieldset {
+            min-width: 98%;
+            border: none;
+            border-top: 1px solid #305a72;
+        }
+
+        table th, table td {
+            padding: 5px 10px;
+            /* border: 1px solid #DDD; */
+        }
+
+        table tr {
+            border: None;
+        }
+
+        ul.select, .form input, .form select, .form textarea, .form ul.select {
+            padding: 2px 10px;
+        }
+
+        form input, form select, form textarea, form ul.select, .form input, .form select, .form textarea, .form
+        ul.select {
+            padding: 2px 10px;
+        }
+
+        form select, .form select {
+            max-width: 150px;
+            min-width: 100px;
+        }
+
+        body {
+            font-family: "OpenSans", Arial, sans-serif;
+            color: #363463;
+            font-size: 14px;
+        }
+
+        .alnVertical {
+            vertical-align: top;
+        }
+        .td_overwrote {
+            border: 1px solid black;
+        }
+    
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
+    <script type="text/javascript">
+        beforeSubmit.push(function() {
+        var val_encounterDate = getValue('visit_date.value');
+        var val_next_appointment = getValue('next_appointment.value');
+        if (val_encounterDate > val_next_appointment) {
+        getField('next_appointment.error').html('Next appointment date has to be later than visit date').show();
+        return false;
+        }
+
+        return true;
+        });
+    </script>
+    <script type="text/javascript">
+
+        var $ = jQuery;
+        $(document).ready(function () {
+           // $('.hasDatepicker').attr('readonly', true);
+        });
+$(document).ready(function ()
+	{
+	   $('#height').keyup(calBMI);
+           $('#weight').keyup(calBMI);
+           $('#length').keyup(calBMI);
+	});
+
+function calBMI(){
+    var height_val = getValue('height.value');
+    var weight_val = getValue('weight.value');
+    var length_val = getValue('length.value');
+    var height_num = parseFloat(height_val);
+    var weight_num = parseFloat(weight_val);
+    var length_num = parseFloat(length_val);
+    if(!isNaN(height_num)){
+        if(!isNaN(weight_num)){
+            height_num = height_num/100;
+            var bmi_val = weight_num / (height_num * height_num);
+            setValue('bmi.value',bmi_val.toFixed(2));
+        }
+        else{
+            setValue('bmi.value', "");
+        }
+    }
+    else if(!isNaN(length_num)){
+        if(!isNaN(weight_num)){
+            length_num  = length_num/100;
+            var bmi_val = weight_num / (length_num* length_num);
+            setValue('bmi.value',bmi_val.toFixed(2));
+        }
+        else{
+            setValue('bmi.value', "");
+        }
+}
+    else {
+        setValue('bmi.value', "");
+    }
+
+    if(height_val.length > 0){
+        setValue('length.value', "");
+       $('#length').hide(200);
+}
+    else{
+        $('#length').show(200);
+}
+
+    if(length_val.length > 0){
+ setValue('height.value', "");
+$('#height').hide(200);
+}
+    else{
+        $('#height').show(200);
+}
+}
+    </script>
+   <!-- <div class="hidden" id="encounter-details" sectionTag="section" headerStyle="title" headerLabel="Encounter Details">
+        <fieldset>
+            <legend class="legend_style">When?</legend>
+            <label>When?</label>
+            <encounterDate default="now" showTime="false" allowFutureDates="false" />
+        </fieldset>
+
+        <fieldset>
+            <legend>Who?</legend>
+            <label>Who?</label>
+            <encounterProviderAndRole default="currentUser" encounterRole="240b26f9-dd88-4172-823d-4a8bfeb7841f"
+                                      required="true" />
+        </fieldset>
+
+        <fieldset>
+            <legend>Where?</legend>
+            <label>Where?</label>
+            <encounterLocation default="SessionAttribute:emrContext.sessionLocationId" />
+        </fieldset>
+    </div>-->
+    <script type="text/javascript">
+        <!--jQuery(function() {-->
+        <!--&lt;!&ndash;Hide the following questions when the form loads&ndash;&gt;-->
+        <!--htmlForm.simpleUi.hideField('familyr'); htmlForm.simpleUi.hideField('familyro');-->
+        <!--});-->
+    </script>
+    <table style="margin-bottom: 20px;">
+        <thead>
+            <tr>
+                <th style="text-align: center">Daily ANC FORM(NHMIS/HF/ANC)</th>
+            </tr>
+        </thead>
+    </table>
+
+
+    <fieldset style="border: 1px solid #305a72; min-width: 90%; margin-left:5%; padding: 6px; margin-bottom: 2%; border-radius: 9px;">
+        <legend class="legend_style">Last Clinical Parameters</legend>
+        <table id="dashboard" cellspacing="10" cellpadding="5" align="center">
+
+            <tr><td><b>Weight:</b><font color='blue' style="font-weight: bold"><lookup expression="fn.latestObs('5089').valueNumeric" /></font>kg <lookup expression="fn.latestObs('5089').obsDatetime" /></td><td><b>Height:</b><font color='blue' style="font-weight: bold"><lookup expression="fn.latestObs('5090').valueNumeric" /></font> cm <lookup expression="fn.latestObs('5090').obsDatetime" /></td></tr>
+        </table>
+    </fieldset>
+    <div class="hidden" id="encounter-details" sectionTag="section" headerStyle="title" headerLabel="Encounter Details">
+        <fieldset>
+            <legend class="legend_style">When?</legend>
+            <label>When?</label>
+            <encounterDate default="now" showTime="false" allowFutureDates="false" />
+        </fieldset>
+        <fieldset>
+            <legend>Who?</legend>
+            <label>Who?</label>
+            <encounterProviderAndRole default="currentUser" encounterRole="240b26f9-dd88-4172-823d-4a8bfeb7841f" required="true" />
+        </fieldset>
+        <fieldset>
+            <legend>Where?</legend>
+            <label>Where?</label>
+            <encounterLocation default="SessionAttribute:emrContext.sessionLocationId" />
+        </fieldset>
+    </div>
+
+
+    <table>
+        <tr>
+            <td class="alnright">Visit Date</td>
+            <td>
+                <encounterDate  id="visit_date" showTime="false" allowFutureDates="false" required="true" />
+            </td>
+            
+            <td class="alnright">Phone Number</td>
+            <td>
+                <obs conceptId="159635"/>
+            </td>
+
+
+
+        </tr>
+    </table>
+
+    <fieldset>
+        <legend class="legend_style">Visit Details</legend>
+        <table>
+            
+
+
+           <tr>
+                
+                                         <td class="alnright_s">Parity:</td>
+                                         <td class="alnleft_s">
+                     	                 <obs  conceptId="1053" required="true"/>
+                                         </td>
+                    
+                    <td class="alnright_s">Antenatal clinic Attendance:</td>
+                      <td>
+                        <obs  conceptId="164181" required="true"/>
+                     
+                    
+                    </td> 
+
+                      <td class="alnright">LMP</td>
+                      <td>
+                     <obs conceptId="1427"/>
+                     </td>
+            </tr>
+
+                <tr>
+                      <td class="alnright">Age of pregnancy (in weeks)</td>
+                      <td>
+                     <obs conceptId="1438"/>
+                     </td>
+
+                     
+                     
+                      <td class="alnright">No of Antenatal clinic Visit(s) to date</td>
+                      <td>
+                       <obs conceptId="1425"/>
+                      </td>
+               </tr>
+                          <tr>
+                      <td  class="alnright">Blood Pressure</td>
+                      <td width="10%">
+                      <obs conceptId="5085"/>/<obs conceptId="5086"/>
+                      </td>
+                      <td class="alnright">Height</td>
+                      <td>
+                      <obs conceptId="5090"/>
+                      </td>
+                      <td class="alnright">Weight</td>
+                      <td>
+                      <obs conceptId="5089"/>
+                      </td>
+                    
+                      
+                      
+                           </tr><tr>
+                                        <td class="alnright_s">LLIN Given?</td>
+                                         <td class="alnleft_s">
+                     	                 <obs  conceptId="160428" required="true"/>
+                                         </td>
+
+                               </tr>
+        </table> 
+            </fieldset>
+                 <fieldset><legend class="legend_style">Counselling</legend>
+
+                   <table>
+                     <tr>
+
+                                           
+                       <td width="5%"> <obs  conceptId="165350" answerConceptId="165684" answerLabel=""/>HIV Testing Services</td> 
+                       <td width="5%"> <obs  conceptId="165350" answerConceptId="118935" answerLabel=""/>Female Genital Mutilation</td> 
+                      <td width="5%"> <obs  conceptId="165350" answerConceptId="119874" answerLabel=""/>Family Planning</td> 
+
+                    </tr>
+
+                    <tr>
+                        <td width="5%"> <obs  conceptId="165350" answerConceptId="1380" answerLabel=""/>Maternal Nutrition</td> 
+                        <td width="5%"> <obs  conceptId="165350" answerConceptId="161543" answerLabel=""/>Early Initiation of Breast Feeding</td> 
+                        <td width="5%"> <obs  conceptId="165350" answerConceptId="161096" answerLabel=""/>Exclusive Breasfeeding</td> 
+
+                    </tr>
+                 </table>
+    </fieldset>
+
+
+                       <fieldset>
+                           <legend class="legend_style">Testing and Treament</legend>
+
+                                <table>
+                                     <tr>
+
+                                              <td  width="10" class="alnright">Syphilis Testing</td> 
+                                              <td class="alnleft"> <obs  id="syp" conceptId="299" answerConceptIds="1304,1228,1229" answerLabels="Not   done,Positive,Negative">
+
+                                                <controls>
+                                                <when value="1228" thenDisplay="#syp1"/>
+                         
+                                                </controls></obs>
+                                              </td> 
+
+                                              
+             <td colspan="2" id="syp1"> 
+     Treated for Syphilis?<obs conceptId="166296" answerConceptIds="1065,1066" answerLabels="Yes,No"/>
+             </td> 
+
+
+           <td class="alnright">Hepatitis B Testing</td> 
+           <td class="alnleft"> <obs id="hepb" conceptId="159430" answerConceptIds="1138,703,664" answerLabels="Not done,Positive,Negative">
+                                                <controls>
+                                                <when value="703" thenDisplay="#hepb1"/>
+                         
+                                                </controls></obs>
+
+         </td>
+            
+            <td id="hepb1"> Referred?<obs conceptId="166297" answerConceptIds="1065,1066" answerLabels="Yes,No"/></td>
+
+                                    </tr>
+
+                                       <tr>
+                                      <td class="alnright">Hepatitis C Testing</td> 
+                                      <td class="alnleft"> 
+                                      <obs conceptId="161471" answerConceptIds="1138,703,664" answerLabels="Not done,Positive,Negative"/>
+                                       </td>
+                                     
+                                     <td class="alnright">Referred?</td> 
+                                     <td class="alnleft"> 
+                                     <obs conceptId="166298" answerConceptIds="1065,1066" answerLabels="Yes,No"/>
+                                     </td>
+
+                                       </tr>
+                 </table>
+    </fieldset>
+
+<fieldset>
+        <legend class="legend_style">Haematology/Blood test result</legend>
+        <table>
+             <tr>      
+                 <td class="alnright">HB/PCV (g/dl)</td> 
+                 <td class="alnleft">  
+                  <obs conceptId="165920"/>
+                 </td>
+
+                  <td class="alnright">Sugar(Gestational Diabetes)</td> 
+                  <td class="alnleft">  
+                  <obs conceptId="1449"/>
+                 </td>
+             </tr>
+        </table>
+  </fieldset>
+    
+<fieldset>
+        <legend class="legend_style">Urinalysis</legend>
+        <table>
+             <tr>      
+                 
+                 <td class="alnright">Sugar test result</td> 
+                 <td class="alnleft">  
+                  <obs conceptId="9"/>
+                 </td>
+
+                 <td class="alnright">Protein test result</td> 
+                 <td class="alnleft">  
+                  <obs conceptId="717"/>
+                 </td>
+             </tr>
+        </table>
+  </fieldset>
+<fieldset>
+        <legend class="legend_style">Treatment</legend>
+        <table>
+             <tr>      
+                 
+                 <td class="alnright">Doses of IPT Given</td> 
+                 <td class="alnleft">  
+                  <obs conceptId="166285"/>
+                 </td>
+
+                 <td class="alnright">Hematinics Given (Iron and Folic Acid supplement)</td> 
+                 <td class="alnleft">  
+                  <obs conceptId="166284"/>
+                 </td>
+
+                 <td class="alnright">Tetanus Diphtheria</td> 
+                 <td class="alnleft">  
+                  <obs conceptId="166291"/>
+                 </td>
+
+
+
+
+
+
+             </tr>
+
+
+              <tr>
+                 <td class="alnright">Associated problems</td> 
+                 <td class="alnleft">  
+                  <obs conceptId="165680"/>
+                 </td>
+                <td class="alnright">Outcome of Visit</td> 
+                 <td class="alnleft">  
+                  <obs id="tran" conceptId="166295">
+                 
+                                               <controls>
+                                                <when value="166294" thenDisplay="#trans1"/>
+                         
+                                                </controls></obs>
+
+                </td>
+
+                <td id="trans1">Transportation Out through?
+                 
+                  <obs conceptId="166294" answerLabels="Ambulance,Others"/>
+                 </td>
+
+
+           </tr>
+
+
+
+        </table>
+  </fieldset>
+
+
+
+
+
+
+
+
+
+    <fieldset>
+        <legend class="legend_style">Signature</legend>
+        <table>
+
+
+<tr>                          <td class="alnright_s">Name of Reporting Officer:</td>
+                               <td class="alnleft_s">
+                                <encounterProvider required="true"/>
+                               </td>
+                                         
+                                         <td class="alnright_s">Date Reported:</td>
+                                         <td class="alnleft_s">
+                     	                 <obs  conceptId="165414" required="true"/>
+                                         </td>
+
+
+                                        
+                                     <td>Facility:</td>
+                                     <td>
+                                       <encounterLocation default="SessionAttribute:emrContext.sessionLocationId" />
+                                      </td>
+                                         
+</tr>
+
+
+
+
+        </table>
+    </fieldset>
+    
+    	
+    <submit />
+</htmlform>
