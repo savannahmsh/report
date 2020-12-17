@@ -1,0 +1,6 @@
+INSERT INTO `form` VALUES (74, 'Malaria, In Patient Care (IPC) Daily Form', '1', NULL, 1, NULL, NULL, NULL, 35, 1, '2020-12-10 14:04:01', 1, '2020-12-11 22:00:40', 0, NULL, NULL, NULL, 'ad2847a1-6efb-4947-940b-f1d296ee5019');
+INSERT INTO `form` VALUES (75, 'Malaria, Severe Malaria Treatment form', '1.0', NULL, 1, NULL, NULL, NULL, 35, 1, '2020-12-10 14:15:50', 1, '2020-12-15 19:10:44', 0, NULL, NULL, NULL, 'd5cf8ca3-b6d6-40a9-b99a-270e51a23de6');
+INSERT INTO `form` VALUES (76, 'Malaria, Child Immunization Form', '1', NULL, 1, NULL, NULL, NULL, 35, 1, '2020-12-10 21:14:20', 1, '2020-12-11 22:02:54', 0, NULL, NULL, NULL, '4c7b91dd-4836-4794-b752-8d783101ac36');
+INSERT INTO `form` VALUES (77, 'Malaria, Daily General Attendance Form', '2019', NULL, 1, NULL, NULL, NULL, 35, 1, '2020-12-11 07:48:48', 1, '2020-12-11 21:59:45', 0, NULL, NULL, NULL, '5fb70fa4-826e-4b7f-9179-22d437bf17a4');
+INSERT INTO `form` VALUES (78, 'Malaria, Daily ANC Form', '1', NULL, 1, NULL, NULL, NULL, 35, 1, '2020-12-12 09:23:41', 1, '2020-12-12 14:19:13', 0, NULL, NULL, NULL, 'a7612e61-9713-4c5c-a90d-d0d555a72f91');
+INSERT INTO `form` VALUES (81, 'Malaria, Daily OPD Form', '1', NULL, 1, NULL, NULL, NULL, 35, 1, '2020-12-13 11:31:18', 1, '2020-12-13 17:51:53', 0, NULL, NULL, NULL, '6bc064fa-a4aa-4437-9d3f-466b7337cfdd');
