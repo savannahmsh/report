@@ -1,0 +1,2 @@
+INSERT INTO `encounter_type` VALUES (35, 'Malaria Treatment (OPD)', 'Out Patient Department (OPD)', 1, '2020-12-10 11:30:46', 0, NULL, NULL, NULL, 'afcc6dbb-afce-4fcd-b91f-aa4801805400', NULL, NULL, 1, '2020-12-21 03:08:44');
+INSERT INTO `encounter_type` VALUES (36, 'Malaria Program', NULL, 1, '2020-12-12 21:56:27', 0, NULL, NULL, NULL, 'db3ea79f-7e53-47d7-8cf3-4a3bf0104cda', NULL, 'Manage Forms', 1, '2020-12-12 22:11:46');
