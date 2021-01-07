@@ -1,5 +1,5 @@
-Download and run the following files
-1. Dumpfilefinal.sql
-concept.zip
+Download and run 
+1. Dumpfilefinal.sql 
 
-Dumpfilefinal contains list of malaria forms and reports for Nigeria MRS and concept.zip contains list of concepts.
+
+Dumpfilefinal contains list of malaria forms and reports for Nigeria MRS and list of concepts. 
